@@ -17,6 +17,7 @@
     <!-- CSS Files -->
     <link href="{{url('/')}}/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
 
+    <!-- Custom CSS -->
     <style>
         .custom_hover:hover {
             background-color: #81aa66 !important;
