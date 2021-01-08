@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+    image: 'laravelapp'
+    container_name: "laravelapp_Web_BO"
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
