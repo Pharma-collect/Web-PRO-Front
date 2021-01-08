@@ -1,20 +1,11 @@
 version: '3.7'
 services:
-  db:
-    image: mysql:5.7
-    restart: always
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_DATABASE: 'laravel_dev'
-      MYSQL_ALLOW_EMPTY_PASSWORD: 1
-      MYSQL_PASSWORD: ""
-
   app:
     build:
       context: .
       dockerfile: .docker/Dockerfile
     image: 'laravelapp'
+    container_name: "laravelappProBO"
     ports:
       - "8080:80"
     volumes:
