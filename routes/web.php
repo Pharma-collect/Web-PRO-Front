@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/home/index', [\App\Http\Controllers\HomeController::class, 'index']);
+
+Route::get('/user', [\App\Http\Controllers\UserController::class, 'index']);
+Route::get('/user/index', [\App\Http\Controllers\UserController::class, 'index']);
