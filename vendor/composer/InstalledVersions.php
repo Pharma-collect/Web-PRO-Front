@@ -1,15 +1,5 @@
 <?php
 
-
-
-
-
-
-
-
-
-
-
 namespace Composer;
 
 use Composer\Semver\VersionParser;
@@ -452,15 +442,6 @@ private static $installed = array (
         0 => '*',
       ),
     ),
-    'laravel-frontend-presets/argon' => 
-    array (
-      'pretty_version' => 'v1.1.1',
-      'version' => '1.1.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '62b3cb7516a605634416ceb386c6f2b467bc5f45',
-    ),
     'laravel/framework' => 
     array (
       'pretty_version' => 'v8.14.0',
@@ -479,15 +460,6 @@ private static $installed = array (
       ),
       'reference' => NULL,
     ),
-    'laravel/legacy-factories' => 
-    array (
-      'pretty_version' => 'v1.1.0',
-      'version' => '1.1.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '5e3fe2fd5fda64e20ea5c74c831a7346294e902a',
-    ),
     'laravel/tinker' => 
     array (
       'pretty_version' => 'v2.5.0',
@@ -496,15 +468,6 @@ private static $installed = array (
       array (
       ),
       'reference' => '45884b526e10a88a1b179fa1a1a24d5468c668c2',
-    ),
-    'laravel/ui' => 
-    array (
-      'pretty_version' => 'v3.2.0',
-      'version' => '3.2.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'a1f82c6283c8373ea1958b8a27c3d5c98cade351',
     ),
     'league/commonmark' => 
     array (
