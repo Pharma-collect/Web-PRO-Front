@@ -40,15 +40,27 @@
         <div class="sidebar-wrapper">
             <ul class="nav">
                 <li class="nav-item active">
-                    <a class="nav-link nav-link-custom" href="{{url('/')}}">
+                    <a class="nav-link nav-link-custom" href="{{url('/admin')}}">
                         <i class="material-icons">dashboard</i>
                         <p>Tableau de bord</p>
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{url('/user')}}">
+                    <a class="nav-link" href="{{url('/admin/user')}}">
                         <i class="material-icons">person</i>
-                        <p>User Profile</p>
+                        <p>Mon compte</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{url('/admin/product')}}">
+                        <i class="material-icons">shop</i>
+                        <p>Produits</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{url('/admin/order')}}">
+                        <i class="material-icons">receipt</i>
+                        <p>Commandes</p>
                     </a>
                 </li>
             </ul>
@@ -77,10 +89,10 @@
                                 </p>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                                <a class="dropdown-item custom_hover" href="#">Profile</a>
-                                <a class="dropdown-item custom_hover" href="#">Settings</a>
+                                <a class="dropdown-item custom_hover" href="#">Profil</a>
+                                <a class="dropdown-item custom_hover" href="#">Paramètres</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item custom_hover" href="#">Log out</a>
+                                <a class="dropdown-item custom_hover" href="#">Déconnexion</a>
                             </div>
                         </li>
                     </ul>
