@@ -29,7 +29,7 @@
                             <td> {{$product->capacity}} </td>
                             <td> {{$product->price}} € </td>
                             <td><i class="material-icons">create</i></td>
-                            <td><i class="material-icons">cancel</i></a></td>
+                            <td><a onClick="$('#delete_form_{{$product->id}}').submit();" href="#"><form id="delete_form_{{$product->id}}" method="post" action="{{route('dropProduct', $product->id)}}">@csrf<i class="material-icons">cancel</i></form></a></td>
                         </tr>
                     @endforeach
                 </tbody>

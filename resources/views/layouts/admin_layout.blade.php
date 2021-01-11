@@ -39,25 +39,25 @@
         </div>
         <div class="sidebar-wrapper">
             <ul class="nav">
-                <li class="nav-item active">
-                    <a class="nav-link nav-link-custom" href="{{url('/admin')}}">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('/admin')}}">
                         <i class="material-icons">dashboard</i>
                         <p>Tableau de bord</p>
                     </a>
                 </li>
-                <li class="nav-item ">
+                <li class="nav-item">
                     <a class="nav-link" href="{{url('/admin/user')}}">
                         <i class="material-icons">person</i>
                         <p>Mon compte</p>
                     </a>
                 </li>
-                <li class="nav-item ">
+                <li class="nav-item">
                     <a class="nav-link" href="{{url('/admin/product')}}">
                         <i class="material-icons">shop</i>
                         <p>Produits</p>
                     </a>
                 </li>
-                <li class="nav-item ">
+                <li class="nav-item">
                     <a class="nav-link" href="{{url('/admin/order')}}">
                         <i class="material-icons">receipt</i>
                         <p>Commandes</p>

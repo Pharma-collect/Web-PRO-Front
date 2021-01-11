@@ -17009,12 +17009,12 @@ legend {
 }
 
 a {
-  color: #9c27b0;
+  color: #0c8835 !important ;
 }
 
 a:hover,
 a:focus {
-  color: #89229b;
+  color: #54a770;
   text-decoration: none;
 }
 

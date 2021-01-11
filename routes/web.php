@@ -22,6 +22,9 @@ Route::get('/admin/user/index', [\App\Http\Controllers\UserController::class, 'i
 
 Route::get('/admin/product', [\App\Http\Controllers\ProductController::class, 'index']);
 Route::get('/admin/product/index', [\App\Http\Controllers\ProductController::class, 'index']);
+Route::post('/admin/product/delete/{id}', [\App\Http\Controllers\ProductController::class, 'dropProduct'])->name('dropProduct');
 
 Route::get('/admin/order', [\App\Http\Controllers\OrderController::class, 'index']);
 Route::get('/admin/order/index', [\App\Http\Controllers\OrderController::class, 'index']);
+
+
