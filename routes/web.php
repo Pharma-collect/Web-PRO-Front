@@ -19,3 +19,9 @@ Route::get('/home/index', [\App\Http\Controllers\HomeController::class, 'index']
 
 Route::get('/user', [\App\Http\Controllers\UserController::class, 'index']);
 Route::get('/user/index', [\App\Http\Controllers\UserController::class, 'index']);
+
+Route::get('/product', [\App\Http\Controllers\ProductController::class, 'index']);
+Route::get('/product/index', [\App\Http\Controllers\ProductController::class, 'index']);
+
+Route::get('/order', [\App\Http\Controllers\OrderController::class, 'index']);
+Route::get('/order/index', [\App\Http\Controllers\OrderController::class, 'index']);

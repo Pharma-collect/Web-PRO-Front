@@ -51,6 +51,18 @@
                         <p>Mon compte</p>
                     </a>
                 </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{url('/product')}}">
+                        <i class="material-icons">shop</i>
+                        <p>Produits</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{url('/order')}}">
+                        <i class="material-icons">receipt</i>
+                        <p>Commandes</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
