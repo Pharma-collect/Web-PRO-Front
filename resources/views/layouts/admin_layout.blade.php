@@ -31,7 +31,7 @@
 
 <body class="">
 <div class="wrapper ">
-    <div class="sidebar" data-background-color="white" data-image="{{url('/')}}/assets/img/sidebar-1.jpg">
+    <div class="sidebar" data-background-color="white" data-image="{{url('/')}}/assets/img/pharma.jfif">
         <div class="logo">
             <a href="{{url('/')}}" class="simple-text logo-normal">
                 Pharma-Collect
