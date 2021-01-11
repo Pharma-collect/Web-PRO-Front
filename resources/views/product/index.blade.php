@@ -12,7 +12,7 @@
         <div class="table-responsive">
             <table class="table">
                 <thead class=" text-primary">
-                    <th><i class="material-icons">insert_photo</i></th>
+                    <th></th>
                     <th>Nom</th>
                     <th>Description</th>
                     <th>Contenance</th>
