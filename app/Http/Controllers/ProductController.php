@@ -16,7 +16,7 @@ class ProductController extends Controller
     {    
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('POST', 'https://88-122-235-110.traefik.me:61001/api/product/getProductsByPharmacy', [
+        $response = $client->request('POST',  env('HOST_URL').env('GET_PRODUCTS_BY_PHARMACY') , [
             'verify' => false,
             'headers' => [
                 'Host' => 'node',
@@ -40,7 +40,7 @@ class ProductController extends Controller
     {    
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('POST', 'https://88-122-235-110.traefik.me:61001/api/product/deleteProductById', [
+        $response = $client->request('POST', env('HOST_URL').env('DELETE_PRODUCT_BY_ID'), [
             'verify' => false,
             'headers' => [
                 'Host' => 'node',
