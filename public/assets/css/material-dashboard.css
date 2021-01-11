@@ -14440,7 +14440,8 @@ h2.title {
 }
 
 .text-primary {
-  color: #9c27b0 !important;
+  color: #0c8835 !important;
+  font-weight: bold;
 }
 
 .text-danger {
@@ -17490,7 +17491,7 @@ html[dir="rtl"] .form-check .form-check-sign .check:before {
   transform: scale(0.94);
   top: 12px;
   filter: blur(12px);
-  position: absolute;
+  position: absolute; 
   width: 100%;
   height: 100%;
   background-size: cover;
