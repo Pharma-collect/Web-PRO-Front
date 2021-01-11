@@ -53,7 +53,7 @@ class ProductController extends Controller
         $resultResponse = json_decode($response->getBody()->getContents());
 
         if($resultResponse->success){
-            return $resultResponse->result;
+            return redirect('admin/product');
         } else {
             var_dump($resultResponse->error);
         }
