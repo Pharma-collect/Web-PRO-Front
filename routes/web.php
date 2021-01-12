@@ -29,6 +29,8 @@ Route::group(['middleware' => ['customAuth', 'tokenValidity']], function () {
     Route::post('/admin/product/delete', [\App\Http\Controllers\ProductController::class, 'dropProduct'])->name('dropProduct');
     Route::post('/admin/product/update_form', [\App\Http\Controllers\ProductController::class, 'updateForm'])->name('updateForm');
     Route::post('/admin/product/update', [\App\Http\Controllers\ProductController::class, 'updateProduct'])->name('updateProduct');
+    Route::post('/admin/product/new_product_form', [\App\Http\Controllers\ProductController::class, 'newProductForm'])->name('newProductForm');
+    Route::post('/admin/product/new_product', [\App\Http\Controllers\ProductController::class, 'newProduct'])->name('newProduct');
 
     Route::get('/admin/order', [\App\Http\Controllers\OrderController::class, 'index']);
     Route::get('/admin/order/index', [\App\Http\Controllers\OrderController::class, 'index']);
