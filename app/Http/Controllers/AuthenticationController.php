@@ -14,7 +14,7 @@ class AuthenticationController extends Controller
 
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('POST', 'https://88-122-235-110.traefik.me:61001/api/user_pro/loginPro', [
+        $response = $client->request('POST', env('HOST_URL').env('LOGIN'), [
             'verify' => false,
             'headers' => [
                 'Host' => 'node',
@@ -36,9 +36,9 @@ class AuthenticationController extends Controller
             session(['pharmacy' => serialize($resultResponse->result->pharmacy)]);
             session(['pharmacy_name' => $resultResponse->result->pharmacy->name]);
 
-            return redirect('/');
+            return redirect('/admin');
         } else {
-            return redirect('/connexion');
+            return redirect('/admin/connexion');
         }
     }
 }

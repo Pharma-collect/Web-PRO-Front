@@ -12,7 +12,7 @@ class CustomAuth
         if (!session()->has("token")) {
             session()->flush();
 
-            return redirect('/connexion');
+            return redirect('/admin/connexion');
         }
 
         return $next($request);

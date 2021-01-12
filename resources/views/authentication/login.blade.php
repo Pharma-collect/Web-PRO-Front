@@ -55,7 +55,7 @@
         <div id="login-row" class="row justify-content-center align-items-center">
             <div id="login-column" class="col-md-6">
                 <div id="login-box" class="col-md-12">
-                    <form id="login-form" class="form" action="{{ url('connexion') }}" method="POST">
+                    <form id="login-form" class="form" action="{{ url('/admin/connexion') }}" method="POST">
                         @csrf
                         <h3 class="text-center text-info">Login</h3>
 
@@ -78,12 +78,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <!-- <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br> -->
-                            <input type="submit" name="submit" class="btn btn-info btn-md" value="Connexion">
+                           <input type="submit" name="submit" class="btn btn-info btn-md" value="Connexion">
                         </div>
-                        <!-- <div id="register-link" class="text-right">
-                            <a href="/register" class="text-info">Register here</a>
-                        </div> -->
                     </form>
                 </div>
             </div>

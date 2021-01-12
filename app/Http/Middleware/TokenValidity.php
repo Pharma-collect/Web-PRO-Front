@@ -16,14 +16,14 @@ class TokenValidity
            if(!$jws->isValid(env('JWT_SECRET'))){
                session()->flush();
 
-               return redirect('/connexion');
+               return redirect('/admin/connexion');
            }
 
            return $next($request);
        } else {
            session()->flush();
 
-           return redirect('/connexion');
+           return redirect('/admin/connexion');
        }
     }
 }

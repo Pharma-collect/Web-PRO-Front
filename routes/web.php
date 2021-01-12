@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/connexion', [\App\Http\Controllers\AuthenticationController::class, 'index']);
-Route::post('/connexion', [\App\Http\Controllers\AuthenticationController::class, 'login']);
+Route::get('/admin/connexion', [\App\Http\Controllers\AuthenticationController::class, 'index']);
+Route::post('/admin/connexion', [\App\Http\Controllers\AuthenticationController::class, 'login']);
 
 Route::group(['middleware' => ['customAuth', 'tokenValidity']], function () {
     Route::get('/admin', [\App\Http\Controllers\HomeController::class, 'index']);
@@ -26,9 +26,9 @@ Route::group(['middleware' => ['customAuth', 'tokenValidity']], function () {
 
     Route::get('/admin/product', [\App\Http\Controllers\ProductController::class, 'index']);
     Route::get('/admin/product/index', [\App\Http\Controllers\ProductController::class, 'index']);
-    Route::post('/admin/product/delete/{id}', [\App\Http\Controllers\ProductController::class, 'dropProduct'])->name('dropProduct');
-    Route::post('/admin/product/update_form/{id}', [\App\Http\Controllers\ProductController::class, 'updateForm'])->name('updateForm');
-    Route::post('/admin/product/update/{id}', [\App\Http\Controllers\ProductController::class, 'updateProduct'])->name('updateProduct');
+    Route::post('/admin/product/delete', [\App\Http\Controllers\ProductController::class, 'dropProduct'])->name('dropProduct');
+    Route::post('/admin/product/update_form', [\App\Http\Controllers\ProductController::class, 'updateForm'])->name('updateForm');
+    Route::post('/admin/product/update', [\App\Http\Controllers\ProductController::class, 'updateProduct'])->name('updateProduct');
 
     Route::get('/admin/order', [\App\Http\Controllers\OrderController::class, 'index']);
     Route::get('/admin/order/index', [\App\Http\Controllers\OrderController::class, 'index']);
@@ -37,7 +37,7 @@ Route::group(['middleware' => ['customAuth', 'tokenValidity']], function () {
         session()->flush();
         if(!session()->has('token'))
         {
-            return redirect("/connexion");
+            return redirect("/admin/connexion");
         }
     });
 

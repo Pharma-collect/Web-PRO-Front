@@ -31,9 +31,9 @@
 
 <body class="">
 <div class="wrapper ">
-    <div class="sidebar" data-background-color="white" data-image="{{url('/')}}/assets/img/pharma.jfif">
+    <div class="sidebar" data-background-color="white" data-image="{{url('/admin')}}/assets/img/pharma.jfif">
         <div class="logo">
-            <a href="{{url('/')}}" class="simple-text logo-normal">
+            <a href="{{url('/admin')}}" class="simple-text logo-normal">
                 Pharma-Collect
             </a>
         </div>
