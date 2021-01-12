@@ -46,6 +46,14 @@
                                 </div>
                                 </div>
                             </div> 
+                            <div class="row">
+                                <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Image</label>
+                                    <input type="text" id="image_url" value="{{$product->image_url}}" name="image_url" class="form-control">
+                                </div>
+                                </div>
+                            </div> 
                             <button type="submit" class="btn btn-primary pull-right">Enregistrer</button>
                         </form>
                     </div>

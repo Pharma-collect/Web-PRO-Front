@@ -73,6 +73,7 @@ class ProductController extends Controller
         $price = $request->price;
         $qty = $request->quantity;
         $description = $request->description;
+        $image_url = $request->image_url;
 
         $response = $client->request('POST', env('HOST_URL').env('UPDATE_PRODUCT_BY_ID'), [
             'verify' => false,
@@ -85,6 +86,7 @@ class ProductController extends Controller
                 'price' => $price, 
                 'description' => $description, 
                 'capacity' => $qty,
+                'image_url' => $image_url, 
             ]
         ]);
 
