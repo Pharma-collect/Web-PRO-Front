@@ -6,14 +6,15 @@
 <div class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-primary">
                         <h4 class="card-title">Modifier le produit</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('updateProduct', $product->id)}}" method="POST">
+                        <form action="{{route('updateProduct')}}" method="POST">
                         @csrf
+                            <input type="hidden" value="{{$product->id}}" name="updated_product_id" id="updated_product_id">
                             <div class="row">
                                 <div class="col-md-5">
                                 <div class="form-group">

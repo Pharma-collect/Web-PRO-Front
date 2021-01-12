@@ -13,24 +13,52 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/admin', [\App\Http\Controllers\HomeController::class, 'index']);
-Route::get('/admin/home', [\App\Http\Controllers\HomeController::class, 'index']);
-Route::get('/admin/home/index', [\App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/admin/connexion', [\App\Http\Controllers\AuthenticationController::class, 'index']);
+Route::post('/admin/connexion', [\App\Http\Controllers\AuthenticationController::class, 'login']);
 
-Route::get('/admin/user', [\App\Http\Controllers\UserController::class, 'index']);
-Route::get('/admin/user/index', [\App\Http\Controllers\UserController::class, 'index']);
+Route::group(['middleware' => ['customAuth', 'tokenValidity']], function () {
+    //Home -----------------------------------------------------
+    Route::get('/admin', [\App\Http\Controllers\HomeController::class, 'index']);
+    Route::get('/admin/home', [\App\Http\Controllers\HomeController::class, 'index']);
+    Route::get('/admin/home/index', [\App\Http\Controllers\HomeController::class, 'index']);
+    //End Home -----------------------------------------------------
 
-Route::get('/admin/product', [\App\Http\Controllers\ProductController::class, 'index']);
-Route::get('/admin/product/index', [\App\Http\Controllers\ProductController::class, 'index']);
-Route::post('/admin/product/delete/{id}', [\App\Http\Controllers\ProductController::class, 'dropProduct'])->name('dropProduct');
-Route::post('/admin/product/update_form/{id}', [\App\Http\Controllers\ProductController::class, 'updateForm'])->name('updateForm');
-Route::post('/admin/product/update/{id}', [\App\Http\Controllers\ProductController::class, 'updateProduct'])->name('updateProduct');
-Route::post('/admin/product/new_product_form', [\App\Http\Controllers\ProductController::class, 'newProductForm'])->name('newProductForm');
-Route::post('/admin/product/new_product', [\App\Http\Controllers\ProductController::class, 'newProduct'])->name('newProduct');
+    //User -----------------------------------------------------
+    Route::get('/admin/user', [\App\Http\Controllers\UserController::class, 'index']);
+    Route::get('/admin/user/index', [\App\Http\Controllers\UserController::class, 'index']);
+    //End User -----------------------------------------------------
 
+    //Product -----------------------------------------------------
+    Route::get('/admin/product', [\App\Http\Controllers\ProductController::class, 'index']);
+    Route::get('/admin/product/index', [\App\Http\Controllers\ProductController::class, 'index']);
 
-Route::get('/admin/order', [\App\Http\Controllers\OrderController::class, 'index']);
-Route::get('/admin/order/index', [\App\Http\Controllers\OrderController::class, 'index']);
+    Route::post('/admin/product/delete', [\App\Http\Controllers\ProductController::class, 'dropProduct'])->name('dropProduct');
+    Route::get('/admin/product/delete', function(){return redirect("/admin/product");});
 
+    Route::post('/admin/product/update_form', [\App\Http\Controllers\ProductController::class, 'updateForm'])->name('updateForm');
+    Route::get('/admin/product/update_form', function(){return redirect("/admin/product");});
 
+    Route::post('/admin/product/update', [\App\Http\Controllers\ProductController::class, 'updateProduct'])->name('updateProduct');
+    Route::get('/admin/product/update', function(){return redirect("/admin/product");});
 
+    Route::match(array('GET','POST'),'/admin/product/new_product_form', [\App\Http\Controllers\ProductController::class, 'newProductForm'])->name('newProductForm');
+
+    Route::post('/admin/product/new_product', [\App\Http\Controllers\ProductController::class, 'newProduct'])->name('newProduct');
+    Route::get('/admin/product/new_product', function(){return redirect("/admin/product");});
+    // End Product -----------------------------------------------------
+
+    //Order -----------------------------------------------------
+    Route::get('/admin/order', [\App\Http\Controllers\OrderController::class, 'index']);
+    Route::get('/admin/order/index', [\App\Http\Controllers\OrderController::class, 'index']);
+    //End Order -----------------------------------------------------
+
+    //Logout -----------------------------------------------------
+    Route::get('/admin/logout', function() {
+        session()->flush();
+        if(!session()->has('token'))
+        {
+            return redirect("/admin/connexion");
+        }
+    });
+
+});

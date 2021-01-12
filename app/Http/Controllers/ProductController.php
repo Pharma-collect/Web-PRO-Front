@@ -60,19 +60,15 @@ class ProductController extends Controller
 
     }
 
-    public function updateForm($product_id)
+    public function updateForm()
     { 
-        $result = $this->getProductById($product_id);
+        $result = $this->getProductById(request('update_product_id'));
+
         return view('product/update_form')->with('product', $result);
     }
 
-    public function newProductForm()
-    { 
-        return view('product/new_product_form');
-    }
-
-    public function updateProduct(Request $request, $product_id)
-    {    
+    public function updateProduct(Request $request)
+    {
         $client = new \GuzzleHttp\Client();
         $name = $request->name;
         $price = $request->price;
@@ -86,12 +82,12 @@ class ProductController extends Controller
                 'Host' => 'node',
             ],
             'form_params' => [
-                'product_id' => $product_id,
+                'product_id' => $request->updated_product_id,
                 'title' => $name, 
                 'price' => $price, 
                 'description' => $description, 
                 'capacity' => $qty,
-                'image_url' => $image_url, 
+                'image_url' => $image_url,
             ]
         ]);
 
@@ -105,16 +101,22 @@ class ProductController extends Controller
 
     }
 
+    public function newProductForm()
+    {
+        return view('product/new_product_form');
+    }
+
     public function newProduct(Request $request)
-    {    
+    {
         $client = new \GuzzleHttp\Client();
+        $pharmacy = unserialize(session('pharmacy'));
 
         $name = $request->name;
         $price = $request->price;
         $qty = $request->quantity;
         $description = $request->description;
         $image_url = $request->image_url;
-        $id_pharmacy = 1;
+        $id_pharmacy = $pharmacy->id;
 
         $response = $client->request('POST', env('HOST_URL').env('ADD_PRODUCT'), [
             'verify' => false,
@@ -122,11 +124,11 @@ class ProductController extends Controller
                 'Host' => 'node',
             ],
             'form_params' => [
-                'title' => $name, 
-                'price' => $price, 
-                'description' => $description, 
+                'title' => $name,
+                'price' => $price,
+                'description' => $description,
                 'capacity' => $qty,
-                'image_url' => $image_url, 
+                'image_url' => $image_url,
                 'pharmacy_id' => $id_pharmacy,
             ]
         ]);
@@ -141,7 +143,7 @@ class ProductController extends Controller
 
     }
 
-    public function dropProduct($id_product)
+    public function dropProduct()
     {    
         $client = new \GuzzleHttp\Client();
 
@@ -151,7 +153,7 @@ class ProductController extends Controller
                 'Host' => 'node',
             ],
             'form_params' => [
-                'product_id' => $id_product,
+                'product_id' => request('del_product_id'),
             ]
         ]);
 
