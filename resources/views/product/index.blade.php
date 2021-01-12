@@ -3,12 +3,12 @@
 @section('title_page', ' Produits')
 
 @section('content')
- 
-
 <div class="card">
     <div class="card-header card-header-primary">
         <h3 class="card-title ">Produits</h3>
-         <p class="card-category"> Retrouvez l'ensemble des produits proposés sur le shop de votre pharmacie.</p>      
+        <p class="card-category"> Retrouvez l'ensemble des produits proposés sur le shop de votre pharmacie.</p>
+        <a onClick="$('#new_product_form').submit();" href="#"><form id="new_product_form" method="post" action="{{route('newProductForm')}}">@csrf<i class="material-icons"  style="color:white !important; float:right; font-size:50px;">add_circle_outline</i></form></a></td>
+                 
     </div>
     <div class="card-body">
     <input type="text" id="search_input" class="form-control" onkeyup="searchFunction()" placeholder="Rechercher un produit...">
@@ -19,7 +19,7 @@
                     <th></th>
                     <th>Nom</th>
                     <th>Description</th>
-                    <th>Contenance</th>
+                    <th>Contenance (ml)</th>
                     <th>Prix</th>
                     <th>Modifier</th>
                     <th>Supprimer</th>

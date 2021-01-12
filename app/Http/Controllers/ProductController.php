@@ -66,6 +66,11 @@ class ProductController extends Controller
         return view('product/update_form')->with('product', $result);
     }
 
+    public function newProductForm()
+    { 
+        return view('product/new_product_form');
+    }
+
     public function updateProduct(Request $request, $product_id)
     {    
         $client = new \GuzzleHttp\Client();
@@ -87,6 +92,42 @@ class ProductController extends Controller
                 'description' => $description, 
                 'capacity' => $qty,
                 'image_url' => $image_url, 
+            ]
+        ]);
+
+        $resultResponse = json_decode($response->getBody()->getContents());
+
+        if($resultResponse->success){
+            return redirect('admin/product');
+        } else {
+            var_dump($resultResponse->error);
+        }
+
+    }
+
+    public function newProduct(Request $request)
+    {    
+        $client = new \GuzzleHttp\Client();
+
+        $name = $request->name;
+        $price = $request->price;
+        $qty = $request->quantity;
+        $description = $request->description;
+        $image_url = $request->image_url;
+        $id_pharmacy = 1;
+
+        $response = $client->request('POST', env('HOST_URL').env('ADD_PRODUCT'), [
+            'verify' => false,
+            'headers' => [
+                'Host' => 'node',
+            ],
+            'form_params' => [
+                'title' => $name, 
+                'price' => $price, 
+                'description' => $description, 
+                'capacity' => $qty,
+                'image_url' => $image_url, 
+                'pharmacy_id' => $id_pharmacy,
             ]
         ]);
 
