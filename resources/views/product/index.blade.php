@@ -33,8 +33,23 @@
                             <td> {{$product->description}} </td>
                             <td> {{$product->capacity}} </td>
                             <td> {{$product->price}} € </td>
-                            <td><a onClick="$('#update_form_{{$product->id}}').submit();" href="#"><form id="update_form_{{$product->id}}" method="post" action="{{route('updateForm', $product->id)}}">@csrf<i class="material-icons">create</i></form></a></td>
-                            <td><a onClick="$('#delete_form_{{$product->id}}').submit();" href="#"><form id="delete_form_{{$product->id}}" method="post" action="{{route('dropProduct', $product->id)}}">@csrf<i class="material-icons">cancel</i></form></a></td>
+                            <td>
+                                <a onClick="$('#update_form_{{$product->id}}').submit();" href="#">
+                                    <form id="update_form_{{$product->id}}" method="post" action="{{route('updateForm')}}">
+                                        @csrf
+                                        <i class="material-icons">create</i>
+                                        <input type="hidden" value="{{$product->id}}" name="update_product_id" id="update_product_id">
+                                    </form></a>
+                            </td>
+                            <td>
+                                <a onClick="$('#delete_form_{{$product->id}}').submit();" href="#">
+                                    <form id="delete_form_{{$product->id}}" method="post" action="{{route('dropProduct')}}">
+                                        @csrf
+                                        <i class="material-icons">cancel</i>
+                                        <input type="hidden" value="{{$product->id}}" name="del_product_id" id="del_product_id">
+                                    </form>
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
