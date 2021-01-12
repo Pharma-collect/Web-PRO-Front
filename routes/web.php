@@ -25,6 +25,8 @@ Route::get('/admin/product/index', [\App\Http\Controllers\ProductController::cla
 Route::post('/admin/product/delete/{id}', [\App\Http\Controllers\ProductController::class, 'dropProduct'])->name('dropProduct');
 Route::post('/admin/product/update_form/{id}', [\App\Http\Controllers\ProductController::class, 'updateForm'])->name('updateForm');
 Route::post('/admin/product/update/{id}', [\App\Http\Controllers\ProductController::class, 'updateProduct'])->name('updateProduct');
+Route::post('/admin/product/new_product_form', [\App\Http\Controllers\ProductController::class, 'newProductForm'])->name('newProductForm');
+Route::post('/admin/product/new_product', [\App\Http\Controllers\ProductController::class, 'newProduct'])->name('newProduct');
 
 
 Route::get('/admin/order', [\App\Http\Controllers\OrderController::class, 'index']);
