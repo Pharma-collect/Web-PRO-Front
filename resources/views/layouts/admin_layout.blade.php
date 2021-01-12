@@ -22,18 +22,14 @@
         .custom_hover:hover {
             background-color: #81aa66 !important;
         }
-
-        .nav-link-custom{
-            background-color: #81aa66 !important;
-        }
     </style>
 </head>
 
 <body class="">
 <div class="wrapper ">
-    <div class="sidebar" data-background-color="white" data-image="{{url('/')}}/assets/img/pharma.jfif">
+    <div class="sidebar" data-background-color="white" data-image="{{url('/admin')}}/assets/img/pharma.jfif">
         <div class="logo">
-            <a href="{{url('/')}}" class="simple-text logo-normal">
+            <a href="{{url('/admin')}}" class="simple-text logo-normal">
                 Pharma-Collect
             </a>
         </div>
@@ -71,7 +67,7 @@
         <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
             <div class="container-fluid">
                 <div class="navbar-wrapper">
-                    <a class="navbar-brand" href="javascript:;">Nom Pharmacie</a>
+                    <a class="navbar-brand" href="javascript:;">{{session("pharmacy_name")}}</a>
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="sr-only">Toggle navigation</span>
@@ -92,7 +88,7 @@
                                 <a class="dropdown-item custom_hover" href="#">Profil</a>
                                 <a class="dropdown-item custom_hover" href="#">Paramètres</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item custom_hover" href="#">Déconnexion</a>
+                                <a class="dropdown-item custom_hover" href="{{url('/admin/logout')}}">Déconnexion</a>
                             </div>
                         </li>
                     </ul>
