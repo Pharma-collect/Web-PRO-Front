@@ -59,7 +59,7 @@
         <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
             <div class="container-fluid">
                 <div class="navbar-wrapper">
-                    <a class="navbar-brand" href="javascript:;">Nom Pharmacie</a>
+                    <a class="navbar-brand" href="javascript:;">{{session("pharmacy_name")}}</a>
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="sr-only">Toggle navigation</span>
@@ -80,7 +80,7 @@
                                 <a class="dropdown-item custom_hover" href="#">Profile</a>
                                 <a class="dropdown-item custom_hover" href="#">Settings</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item custom_hover" href="#">Log out</a>
+                                <a class="dropdown-item custom_hover" href="{{url('/logout')}}">Déconnexion</a>
                             </div>
                         </li>
                     </ul>

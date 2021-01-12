@@ -13,9 +13,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
-Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index']);
-Route::get('/home/index', [\App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/connexion', [\App\Http\Controllers\AuthenticationController::class, 'index']);
+Route::post('/connexion', [\App\Http\Controllers\AuthenticationController::class, 'login']);
 
-Route::get('/user', [\App\Http\Controllers\UserController::class, 'index']);
-Route::get('/user/index', [\App\Http\Controllers\UserController::class, 'index']);
+Route::group(['middleware' => ['customAuth', 'tokenValidity']], function () {
+    Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
+    Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index']);
+    Route::get('/home/index', [\App\Http\Controllers\HomeController::class, 'index']);
+
+    Route::get('/user', [\App\Http\Controllers\UserController::class, 'index']);
+    Route::get('/user/index', [\App\Http\Controllers\UserController::class, 'index']);
+
+    Route::get('/logout', function() {
+        session()->flush();
+        if(!session()->has('token'))
+        {
+            return redirect("/connexion");
+        }
+    });
+
+});
