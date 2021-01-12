@@ -36,6 +36,7 @@ class ProductController extends Controller
 
     }
 
+
     public function dropProduct($id_product)
     {    
         $client = new \GuzzleHttp\Client();
