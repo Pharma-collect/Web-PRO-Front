@@ -50,6 +50,20 @@ Route::group(['middleware' => ['customAuth', 'tokenValidity']], function () {
     //Order -----------------------------------------------------
     Route::get('/admin/order', [\App\Http\Controllers\OrderController::class, 'index']);
     Route::get('/admin/order/index', [\App\Http\Controllers\OrderController::class, 'index']);
+
+    Route::post('/admin/order/delete', [\App\Http\Controllers\OrderController::class, 'dropOrder'])->name('dropOrder');
+    Route::get('/admin/order/delete', function(){return redirect("/admin/order");});
+
+    Route::post('/admin/order/update_order_form', [\App\Http\Controllers\OrderController::class, 'updateOrderForm'])->name('updateOrderForm');
+    Route::get('/admin/order/update_order_form', function(){return redirect("/admin/order");});
+
+    Route::post('/admin/order/update', [\App\Http\Controllers\OrderController::class, 'updateOrder'])->name('updateOrder');
+    Route::get('/admin/order/update', function(){return redirect("/admin/order");});
+
+    Route::match(array('GET','POST'),'/admin/order/new_order_form', [\App\Http\Controllers\OrderController::class, 'newOrderForm'])->name('newOrderForm');
+
+    Route::post('/admin/order/new_order', [\App\Http\Controllers\OrderController::class, 'newOrder'])->name('newOrder');
+    Route::get('/admin/order/new_order', function(){return redirect("/admin/order");});
     //End Order -----------------------------------------------------
 
     //Logout -----------------------------------------------------
