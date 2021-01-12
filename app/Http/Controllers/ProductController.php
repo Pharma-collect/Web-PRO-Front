@@ -8,7 +8,10 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function index(){
-        $result = $this->getProductsByPharmacy(1);
+        $pharmacy = unserialize(session('pharmacy'));
+        $pharmacy_id = $pharmacy->id;
+
+        $result = $this->getProductsByPharmacy($pharmacy_id);
         return view('product/index')->with('products', $result);
     }
 
