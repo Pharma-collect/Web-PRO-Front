@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 class UserController extends Controller
 {
     public function index(){
-        return view('user/index');
+        $pharmacy = unserialize(session("pharmacy"));
+        $pharmacy_name = $pharmacy->name;
+
+        return view('user/index')->with("pharmacy_name", $pharmacy_name);
     }
 }
