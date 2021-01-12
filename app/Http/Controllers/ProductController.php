@@ -60,11 +60,6 @@ class ProductController extends Controller
 
     }
 
-    public function newProductForm()
-    {
-        return view('product/new_product_form');
-    }
-
     public function updateForm()
     { 
         $result = $this->getProductById(request('update_product_id'));
@@ -106,16 +101,22 @@ class ProductController extends Controller
 
     }
 
+    public function newProductForm()
+    {
+        return view('product/new_product_form');
+    }
+
     public function newProduct(Request $request)
     {
         $client = new \GuzzleHttp\Client();
+        $pharmacy = unserialize(session('pharmacy'));
 
         $name = $request->name;
         $price = $request->price;
         $qty = $request->quantity;
         $description = $request->description;
         $image_url = $request->image_url;
-        $id_pharmacy = 1;
+        $id_pharmacy = $pharmacy->id;
 
         $response = $client->request('POST', env('HOST_URL').env('ADD_PRODUCT'), [
             'verify' => false,
