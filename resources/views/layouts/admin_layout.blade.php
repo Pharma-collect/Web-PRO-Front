@@ -22,10 +22,6 @@
         .custom_hover:hover {
             background-color: #81aa66 !important;
         }
-
-        .nav-link-custom{
-            background-color: #81aa66 !important;
-        }
     </style>
 </head>
 
