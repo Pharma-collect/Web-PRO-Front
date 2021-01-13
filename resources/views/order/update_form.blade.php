@@ -27,6 +27,14 @@
                                     <input type="radio" id="ready" name="status" value="ready"> 
                                         <label for="ready">Ready</label>
                                     </div>
+                                    <div>
+                                    <input type="radio" id="container" name="status" value="container"> 
+                                        <label for="container">Container</label>
+                                    </div>
+                                    <div>
+                                    <input type="radio" id="finish" name="status" value="finish"> 
+                                        <label for="finish">Finish</label>
+                                    </div>
                                     
                                 </div>
                                 </div>
@@ -35,7 +43,12 @@
                                 <div class="col-md-5">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">Preparateur</label>
-                                    <select class="form-control" id="preparator">
+                                    @foreach($preparators as $preparator)
+                                    <div>
+                                    <input type="radio" id="{{$preparator->id}}" name="preparator" value="{{$preparator->id}}"> 
+                                        <label for="{{$preparator->id}}">{{$preparator->username}}</label>
+                                    </div>
+                                    @endforeach
                                         
                                     </select>
                                 </div>

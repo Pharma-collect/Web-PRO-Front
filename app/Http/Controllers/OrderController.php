@@ -62,11 +62,41 @@ class OrderController extends Controller
 
     }
 
+    public function getUserProByPharmacy($id_pharma)
+    {    
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('POST',  env('HOST_URL').env('GET_USER_PRO_BY_PHARMACY') , [
+            'verify' => false,
+            'headers' => [
+                'Host' => 'node',
+            ],
+            'form_params' => [
+                'pharmacy_id' => $id_pharma,
+            ]
+        ]);
+
+        $resultResponse = json_decode($response->getBody()->getContents());
+
+        if($resultResponse->success){
+            return $resultResponse->result;
+        } else {
+            var_dump($resultResponse->error);
+        }
+
+    }
+
     public function updateForm()
     { 
         $result = $this->getOrderById(request('update_order_id'));
+        $pharmacy = unserialize(session('pharmacy'));
+        $pharmacy_id = $pharmacy->id;
+        $preparators = $this->getUserProByPharmacy($pharmacy_id);
 
-        return view('order/update_form')->with('order', $result);
+        $data['order'] = $result;
+        $data['preparators'] = $preparators; 
+
+        return view('order/update_form', $data);
     }
 
     public function updateOrder(Request $request)
@@ -95,8 +125,7 @@ class OrderController extends Controller
         $resultResponse = json_decode($response->getBody()->getContents());
 
         if($resultResponse->success){
-            var_dump($resultResponse->result);
-            //return redirect('admin/order');
+            return redirect('admin/order');
         } else {
             var_dump($resultResponse->error);
         }
