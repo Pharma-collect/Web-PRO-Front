@@ -187,4 +187,28 @@ class OrderController extends Controller
         }
 
     }
+
+    public function dropOrder()
+    {    
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('POST', env('HOST_URL').env('DELETE_ORDER_BY_ID'), [
+            'verify' => false,
+            'headers' => [
+                'Host' => 'node',
+            ],
+            'form_params' => [
+                'order_id' => request('del_order_id'),
+            ]
+        ]);
+
+        $resultResponse = json_decode($response->getBody()->getContents());
+
+        if($resultResponse->success){
+            return redirect('admin/order');
+        } else {
+            var_dump($resultResponse->error);
+        }
+
+    }
 }

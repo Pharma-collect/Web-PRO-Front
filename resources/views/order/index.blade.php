@@ -77,7 +77,7 @@
                             </td>
                             <td>
                                 <a onClick="$('#delete_form_{{$order->id}}').submit();" href="#">
-                                    <form id="delete_form_{{$order->id}}" method="post" action="">
+                                    <form id="delete_form_{{$order->id}}" method="post" action="{{route('dropOrder')}}">
                                         @csrf
                                         <i class="material-icons">cancel</i>
                                         <input type="hidden" value="{{$order->id}}" name="del_order_id" id="del_order_id">
