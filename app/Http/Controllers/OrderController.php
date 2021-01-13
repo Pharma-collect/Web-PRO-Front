@@ -143,6 +143,30 @@ class OrderController extends Controller
 
     }
 
+    public function getProductsByPharmacy($id_pharmacy)
+    {    
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('POST',  env('HOST_URL').env('GET_PRODUCTS_BY_PHARMACY') , [
+            'verify' => false,
+            'headers' => [
+                'Host' => 'node',
+            ],
+            'form_params' => [
+                'pharmacy_id' => $id_pharmacy,
+            ]
+        ]);
+
+        $resultResponse = json_decode($response->getBody()->getContents());
+
+        if($resultResponse->success){
+            return $resultResponse->result;
+        } else {
+            var_dump($resultResponse->error);
+        }
+
+    }
+
     public function updateForm()
     { 
         $result = $this->getOrderById(request('update_order_id'));
@@ -199,6 +223,53 @@ class OrderController extends Controller
             ],
             'form_params' => [
                 'order_id' => request('del_order_id'),
+            ]
+        ]);
+
+        $resultResponse = json_decode($response->getBody()->getContents());
+
+        if($resultResponse->success){
+            return redirect('admin/order');
+        } else {
+            var_dump($resultResponse->error);
+        }
+
+    }
+
+    public function newOrderForm()
+    {
+        $pharmacy = unserialize(session('pharmacy'));
+        $pharmacy_id = $pharmacy->id;
+
+        $data['clients'] = $this->getAllClients();
+        $data['products'] = $this->getProductsByPharmacy($pharmacy_id);
+        return view('order/new_order_form', $data);
+    }
+
+    public function newOrder(Request $request)
+    {
+        $client = new \GuzzleHttp\Client();
+        $pharmacy = unserialize(session('pharmacy'));
+
+        $name = $request->name;
+        $price = $request->price;
+        $qty = $request->quantity;
+        $description = $request->description;
+        $image_url = $request->image_url;
+        $id_pharmacy = $pharmacy->id;
+
+        $response = $client->request('POST', env('HOST_URL').env('ADD_ORDER'), [
+            'verify' => false,
+            'headers' => [
+                'Host' => 'node',
+            ],
+            'form_params' => [
+                'title' => $name,
+                'price' => $price,
+                'description' => $description,
+                'capacity' => $qty,
+                'image_url' => $image_url,
+                'pharmacy_id' => $id_pharmacy,
             ]
         ]);
 

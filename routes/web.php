@@ -60,6 +60,11 @@ Route::group(['middleware' => ['customAuth', 'tokenValidity']], function () {
     Route::post('/admin/order/delete', [\App\Http\Controllers\OrderController::class, 'dropOrder'])->name('dropOrder');
     Route::get('/admin/order/delete', function(){return redirect("/admin/order");});
 
+    Route::match(array('GET','POST'),'/admin/order/new_order_form', [\App\Http\Controllers\OrderController::class, 'newOrderForm'])->name('newOrderForm');
+
+    Route::post('/admin/order/new_order', [\App\Http\Controllers\OrderController::class, 'newOrder'])->name('newOrder');
+    Route::get('/admin/order/new_order', function(){return redirect("/admin/order");});
+
     //End Order -----------------------------------------------------
 
     //Logout -----------------------------------------------------

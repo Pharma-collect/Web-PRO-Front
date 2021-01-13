@@ -6,7 +6,8 @@
 <div class="card">
     <div class="card-header card-header-primary">
         <h3 class="card-title ">Commandes</h3>
-        <p class="card-category"> Retrouvez l'ensemble des commandes passées sur le shop de votre pharmacie.</p>                 
+        <p class="card-category"> Retrouvez l'ensemble des commandes passées sur le shop de votre pharmacie.</p>
+        <a onClick="$('#new_order_form').submit();" href="#"><form id="new_order_form" method="post" action="{{route('newOrderForm')}}">@csrf<i class="material-icons"  style="color:white !important; float:right; font-size:50px;">add_circle_outline</i></form></a></td>                 
     </div>
     <div class="card-body">
     <input type="text" id="search_input" class="form-control" onkeyup="searchFunction()" placeholder="Rechercher une commande...">
