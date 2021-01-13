@@ -33,6 +33,24 @@
                             <td> {{$order->total_price}} €</td>
                             <td> {{$order->id_preparator}} </td>
                             <td> {{$order->id_container}} </td>
+                            <td> {{$order->creation_date}} </td>
+                            <td>
+                                <a onClick="$('#update_form_{{$order->id}}').submit();" href="#">
+                                    <form id="update_form_{{$order->id}}" method="post" action="{{route('updateForm')}}">
+                                        @csrf
+                                        <i class="material-icons">create</i>
+                                        <input type="hidden" value="{{$order->id}}" name="update_order_id" id="update_order_id">
+                                    </form></a>
+                            </td>
+                            <td>
+                                <a onClick="$('#delete_form_{{$order->id}}').submit();" href="#">
+                                    <form id="delete_form_{{$order->id}}" method="post" action="">
+                                        @csrf
+                                        <i class="material-icons">cancel</i>
+                                        <input type="hidden" value="{{$order->id}}" name="del_order_id" id="del_order_id">
+                                    </form>
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
