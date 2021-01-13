@@ -10,9 +10,17 @@ class OrderController extends Controller
     public function index(){
         $pharmacy = unserialize(session('pharmacy'));
         $pharmacy_id = $pharmacy->id;
-        $result = $this->getOrdersByPharmacy($pharmacy_id);
-        return view('order/index')->with('orders', $result);
+
+
+        $data['orders'] = $this->getOrdersByPharmacy($pharmacy_id);
+        $data['preparators'] = $this->getUserProByPharmacy($pharmacy_id);
+        $data['containers'] = $this->getContainersByPharmacy($pharmacy_id);
+        $data['clients'] = $this->getAllClients();
+
+        return view('order/index', $data);
     }
+
+  
 
     public function getOrdersByPharmacy($id_pharmacy)
     {    
@@ -37,6 +45,31 @@ class OrderController extends Controller
         }
 
     }
+
+    public function getAllClients()
+    {    
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('GET',  env('HOST_URL').env('GET_ALL_CLIENTS') , [
+            'verify' => false,
+            'headers' => [
+                'Host' => 'node',
+            ]
+        ]);
+
+        $resultResponse = json_decode($response->getBody()->getContents());
+
+        if($resultResponse->success){
+            return $resultResponse->result;
+        } else {
+            var_dump($resultResponse->error);
+        }
+
+    }
+
+    
+
+
 
     public function getOrderById($id_order)
     {    
@@ -86,15 +119,41 @@ class OrderController extends Controller
 
     }
 
+    public function getContainersByPharmacy($id_pharma)
+    {    
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('POST',  env('HOST_URL').env('GET_CONTAINERS_BY_PHARMACY') , [
+            'verify' => false,
+            'headers' => [
+                'Host' => 'node',
+            ],
+            'form_params' => [
+                'pharmacy_id' => $id_pharma,
+            ]
+        ]);
+
+        $resultResponse = json_decode($response->getBody()->getContents());
+
+        if($resultResponse->success){
+            return $resultResponse->result;
+        } else {
+            var_dump($resultResponse->error);
+        }
+
+    }
+
     public function updateForm()
     { 
         $result = $this->getOrderById(request('update_order_id'));
         $pharmacy = unserialize(session('pharmacy'));
         $pharmacy_id = $pharmacy->id;
         $preparators = $this->getUserProByPharmacy($pharmacy_id);
+        $containers = $this->getContainersByPharmacy($pharmacy_id);
 
         $data['order'] = $result;
         $data['preparators'] = $preparators; 
+        $data['containers'] = $containers;
 
         return view('order/update_form', $data);
     }
@@ -116,11 +175,8 @@ class OrderController extends Controller
                 'status' => $status, 
                 'id_preparator' => $preparator, 
                 'id_container' => $container, 
-                
             ]
         ]);
-
-
 
         $resultResponse = json_decode($response->getBody()->getContents());
 

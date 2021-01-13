@@ -29,11 +29,44 @@
                         <tr>
                             <td> {{$order->id}} </td>
                             <td> {{$order->status}} </td>
-                            <td> {{$order->id_client}} </td>
+                            @php
+                                $cli = "Pas de client assigné"
+                            @endphp
+                            @foreach($clients as $client)
+                                @if($client->id === $order->id_client)
+                                    @php
+                                        $cli = $client->username     
+                                    @endphp 
+                                @endif 
+                            @endforeach
+                            <td> {{$cli}} </td>
                             <td> {{$order->total_price}} €</td>
-                            <td> {{$order->id_preparator}} </td>
-                            <td> {{$order->id_container}} </td>
-                            <td> {{$order->creation_date}} </td>
+                            @php
+                                $prep = "Pas de preparateur assigné"
+                            @endphp
+                            @foreach($preparators as $preparator)
+                                @if($preparator->id === $order->id_preparator)
+                                    @php
+                                        $prep = $preparator->username     
+                                    @endphp 
+                                @endif 
+                            @endforeach
+                            <td> {{$prep}} </td>
+                            @php
+                                $cont = "Pas de casier assigné"
+                            @endphp
+                            @foreach($containers as $container)
+                                @if($container->id === $order->id_container)
+                                    @php
+                                        $cont = $container->container_number     
+                                    @endphp 
+                                @endif 
+                            @endforeach
+                            <td> {{$cont}} </td>
+                            @php
+                                $date = $order->creation_date;
+                            @endphp
+                            <td> {{$date}} </td>
                             <td>
                                 <a onClick="$('#update_form_{{$order->id}}').submit();" href="#">
                                     <form id="update_form_{{$order->id}}" method="post" action="{{route('updateForm')}}">
