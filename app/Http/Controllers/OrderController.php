@@ -164,6 +164,10 @@ class OrderController extends Controller
         } else {
             var_dump($resultResponse->error);
         }
+    }
+
+    public function calculate_price($tab_products)
+    {
 
     }
 
@@ -243,6 +247,9 @@ class OrderController extends Controller
 
         $data['clients'] = $this->getAllClients();
         $data['products'] = $this->getProductsByPharmacy($pharmacy_id);
+        $data['preparateurs'] = $this->getUserProByPharmacy($pharmacy_id);
+        $data['containers'] = $this->getContainersByPharmacy($pharmacy_id);
+
         return view('order/new_order_form', $data);
     }
 
@@ -251,12 +258,34 @@ class OrderController extends Controller
         $client = new \GuzzleHttp\Client();
         $pharmacy = unserialize(session('pharmacy'));
 
-        $name = $request->name;
-        $price = $request->price;
-        $qty = $request->quantity;
-        $description = $request->description;
-        $image_url = $request->image_url;
+        $id_client = $request->client;
+        $id_preparator = $request->preparator;
+        $id_container = $request->container;
+
         $id_pharmacy = $pharmacy->id;
+
+        $products = $request->input('products');
+        $quantities = $request->input('quantity');
+        $prices = $request->input('price');
+        
+        $total_price=0;
+        foreach(array_combine($prices, $quantities) as $price => $qty){
+            if(($qty)){
+                $total_price=$total_price + ($price * $qty);
+            }
+        }
+        
+        $quantities = array_filter($quantities);
+        $tab_products = array();
+        foreach(array_combine($products, $quantities) as $product => $qty)
+        {
+            $array_tmp = array(
+                'id_product' => $product,
+                'quantity' => $qty
+            );
+            
+            array_push($tab_products, $array_tmp);
+        }
 
         $response = $client->request('POST', env('HOST_URL').env('ADD_ORDER'), [
             'verify' => false,
@@ -264,12 +293,15 @@ class OrderController extends Controller
                 'Host' => 'node',
             ],
             'form_params' => [
-                'title' => $name,
-                'price' => $price,
-                'description' => $description,
-                'capacity' => $qty,
-                'image_url' => $image_url,
-                'pharmacy_id' => $id_pharmacy,
+                'status' => 'pending',
+                'total_price' => $total_price,
+                'id_client' => $id_client,
+                'id_preparator' => $id_preparator,
+                'id_container' => $id_container,
+                'id_pharmacy' => $id_pharmacy,
+                'products' => $tab_products,
+                'detail' => 'RAS'
+
             ]
         ]);
 
