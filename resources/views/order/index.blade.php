@@ -66,8 +66,9 @@
                             <td> {{$cont}} </td>
                             @php
                                 $date = $order->creation_date;
+                                $parsed_date = date('d-m-Y',strtotime($date));
                             @endphp
-                            <td> {{$date}} </td>
+                            <td> {{$parsed_date}} </td>
                             <td>
                                 <a onClick="$('#update_form_{{$order->id}}').submit();" href="#">
                                     <form id="update_form_{{$order->id}}" method="post" action="{{route('updateForm')}}">
