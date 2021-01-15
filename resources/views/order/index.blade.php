@@ -22,6 +22,7 @@
                     <th>Preparateur</th>
                     <th>Casier</th>
                     <th>Date</th>
+                    <th>Commentaires</th>
                     <th>Modifier</th>
                     <th>Supprimer</th>
                 </thead>
@@ -69,6 +70,7 @@
                                 $parsed_date = date('d-m-Y',strtotime($date));
                             @endphp
                             <td> {{$parsed_date}} </td>
+                            <td> {{$order->detail}}</td>
                             <td>
                                 <a onClick="$('#update_form_{{$order->id}}').submit();" href="#">
                                     <form id="update_form_{{$order->id}}" method="post" action="{{route('updateForm')}}">

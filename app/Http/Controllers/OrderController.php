@@ -192,6 +192,7 @@ class OrderController extends Controller
         $status = $request->status;
         $preparator = $request->preparator;
         $container = $request->container;
+        $detail = $request->details;
 
         $response = $client->request('POST', env('HOST_URL').env('UPDATE_ORDER_BY_ID'), [
             'verify' => false,
@@ -203,6 +204,7 @@ class OrderController extends Controller
                 'status' => $status, 
                 'id_preparator' => $preparator, 
                 'id_container' => $container, 
+                'detail' => $detail
             ]
         ]);
 
@@ -261,8 +263,8 @@ class OrderController extends Controller
         $id_client = $request->client;
         $id_preparator = $request->preparator;
         $id_container = $request->container;
-
         $id_pharmacy = $pharmacy->id;
+        $details = $request->details;
 
         $products = $request->input('products');
         $quantities = $request->input('quantity');
@@ -274,7 +276,7 @@ class OrderController extends Controller
                 $total_price=$total_price + ($price * $qty);
             }
         }
-        
+
         $quantities = array_filter($quantities);
         $tab_products = array();
         foreach(array_combine($products, $quantities) as $product => $qty)
@@ -300,7 +302,7 @@ class OrderController extends Controller
                 'id_container' => $id_container,
                 'id_pharmacy' => $id_pharmacy,
                 'products' => $tab_products,
-                'detail' => 'RAS'
+                'detail' => $details
 
             ]
         ]);

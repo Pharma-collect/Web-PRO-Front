@@ -123,6 +123,16 @@
                                     </div>
                                 </div>
                             </div>  
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Commentaires</label>
+                                        <div class="table-responsive">
+                                            <textarea name="details" cols="40" rows="5"></textarea>
+                                        <div>    
+                                    </div>
+                                </div>
+                            </div>  
                             
                              
                             <button type="submit" class="btn btn-primary pull-right">Ajouter</button>
