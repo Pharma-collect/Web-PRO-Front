@@ -189,6 +189,31 @@ class OrderController extends Controller
         }
     }
 
+    public function updatePrescription($id_prescription, $id_preparator)
+    {    
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('POST',  env('HOST_URL').env('UPDATE_PRESCRIPTION_BY_ID') , [
+            'verify' => false,
+            'headers' => [
+                'Host' => 'node',
+            ],
+            'form_params' => [
+                'id_prescription' => $id_prescription,
+                'id_preparator' => $id_preparator
+            ]
+        ]);
+
+        $resultResponse = json_decode($response->getBody()->getContents());
+
+        if($resultResponse->success){
+            var_dump($resultResponse->result);
+            return redirect('admin/order');
+        } else {
+            var_dump($resultResponse->error);
+        }
+    }
+
     public function updateForm()
     { 
         $result = $this->getOrderById(request('update_order_id'));
@@ -334,6 +359,7 @@ class OrderController extends Controller
         $resultResponse = json_decode($response->getBody()->getContents());
 
         if($resultResponse->success){
+            //$this->updatePrescription($id_prescription, $id_preparator);
             return redirect('admin/order');
         } else {
             var_dump($resultResponse->error);

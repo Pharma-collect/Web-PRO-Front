@@ -25,7 +25,7 @@
                 </thead>
                 <tbody id="prescriptions_table">
                     @foreach($prescriptions as $prescription)
-                    @if($prescription->status === "pending")                               
+                    @if(empty($prescription->id_preparator))                               
                     <tr>
                         <td>
                             <a onClick="$('#new_order_form').submit();" href="#">
@@ -98,7 +98,7 @@
                 </thead>
                 <tbody id="old_prescriptions_table">
                     @foreach($prescriptions as $prescription)
-                    @if($prescription->status != "pending")                               
+                    @if(!empty($prescription->id_preparator))                              
                     <tr>
                         <td> {{$prescription->id}} </td>
                         <td> {{$prescription->status}} </td>
