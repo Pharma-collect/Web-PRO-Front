@@ -55,8 +55,14 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('/admin/order')}}">
-                        <i class="material-icons">receipt</i>
+                        <i class="material-icons">shopping_cart</i>
                         <p>Commandes</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('/admin/prescription')}}">
+                        <i class="material-icons">receipt</i>
+                        <p>Prescriptions</p>
                     </a>
                 </li>
             </ul>

@@ -166,9 +166,27 @@ class OrderController extends Controller
         }
     }
 
-    public function calculate_price($tab_products)
-    {
+    public function getPrescriptionById($id_prescription)
+    {    
+        $client = new \GuzzleHttp\Client();
 
+        $response = $client->request('POST',  env('HOST_URL').env('GET_PRESCRIPTION_BY_ID') , [
+            'verify' => false,
+            'headers' => [
+                'Host' => 'node',
+            ],
+            'form_params' => [
+                'prescription_id' => $id_prescription,
+            ]
+        ]);
+
+        $resultResponse = json_decode($response->getBody()->getContents());
+
+        if($resultResponse->success){
+            return $resultResponse->result;
+        } else {
+            var_dump($resultResponse->error);
+        }
     }
 
     public function updateForm()
@@ -242,15 +260,14 @@ class OrderController extends Controller
 
     }
 
-    public function newOrderForm()
+    public function newOrderForm(Request $request)
     {
         $pharmacy = unserialize(session('pharmacy'));
         $pharmacy_id = $pharmacy->id;
 
-        $data['clients'] = $this->getAllClients();
         $data['products'] = $this->getProductsByPharmacy($pharmacy_id);
-        $data['preparateurs'] = $this->getUserProByPharmacy($pharmacy_id);
         $data['containers'] = $this->getContainersByPharmacy($pharmacy_id);
+        $data['prescription'] = $request->prescription_id;
 
         return view('order/new_order_form', $data);
     }
@@ -260,11 +277,16 @@ class OrderController extends Controller
         $client = new \GuzzleHttp\Client();
         $pharmacy = unserialize(session('pharmacy'));
 
-        $id_client = $request->client;
-        $id_preparator = $request->preparator;
+        $id_preparator = session('user_id');
+
         $id_container = $request->container;
+        $id_prescription = $request->prescription_id;
+        $prescription = $this->getPrescriptionById($id_prescription);
+        $id_client = $prescription->id_client;
+
         $id_pharmacy = $pharmacy->id;
         $details = $request->details;
+
 
         $products = $request->input('products');
         $quantities = $request->input('quantity');
@@ -302,7 +324,9 @@ class OrderController extends Controller
                 'id_container' => $id_container,
                 'id_pharmacy' => $id_pharmacy,
                 'products' => $tab_products,
-                'detail' => $details
+                'detail' => $details,
+                'id_prescription' => $id_prescription
+
 
             ]
         ]);
