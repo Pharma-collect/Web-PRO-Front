@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-primary">
-                        <h4 class="card-title">Ajouter une commande</h4>
+                        <h4 class="card-title">Prendre en charge une prescription</h4>
                     </div>
                     <div class="card-body">
                         <form action="{{route('newOrder')}}" method="POST">
@@ -17,35 +17,10 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="bmd-label-floating">Client</label>
-                                        <div class="table-responsive">
-                                            <table class="table" >
-                                                <tbody id="clients-table" style="display: block; border: 1px solid green; height: 150px; overflow-y: scroll">
-                                                    @foreach($clients as $client)
-                                                    <tr>
-                                                        <div>
-                                                            <td>
-                                                                <input type="radio" id="{{$client->id}}" name="client" value="{{$client->id}}"> 
-                                                            </td>
-                                                            <td>
-                                                                <label for="{{$client->id}}">{{$client->username}}</label>
-                                                            </td>
-                                                        </div>
-                                                    </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        <div>    
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
                                         <label class="bmd-label-floating">Produits</label>
                                         <div class="table-responsive">
                                             <table class="table" >
-                                                <tbody id="clients-table" style="display: block; border: 1px solid green; height: 150px; overflow-y: scroll">
+                                                <tbody id="products-table" style="display: block; border: 1px solid green; height: 150px; overflow-y: scroll">
                                                     @foreach($products as $product)
                                                     <tr>
                                                         <div>
@@ -72,32 +47,6 @@
                                     </div>
                                 </div>
                             </div> 
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="bmd-label-floating">Preparateur</label>
-                                        <div class="table-responsive">
-                                            <table class="table" >
-                                                <tbody id="preparateurs-table" style="display: block; border: 1px solid green; height: 150px; overflow-y: scroll">
-                                                    @foreach($preparateurs as $preparateur)
-                                                    <tr>
-                                                        <div>
-                                                            <td>
-                                                                <input type="radio" id="{{$preparateur->id}}" name="preparator" value="{{$preparateur->id}}"> 
-                                                            </td>
-                                                            <td>
-                                                                <label for="{{$preparateur->id}}">{{$preparateur->username}}</label>
-                                                            </td> 
-                                                        </div>
-                                                    </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        <div>    
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -133,9 +82,8 @@
                                     </div>
                                 </div>
                             </div>  
-                            
-                             
-                            <button type="submit" class="btn btn-primary pull-right">Ajouter</button>
+                            <input type="hidden" value="{{$prescription}}" name="prescription_id" id="prescription_id">
+                            <button type="submit" class="btn btn-primary pull-right">Valider</button>
                         </form>
                     </div>
                 </div>
