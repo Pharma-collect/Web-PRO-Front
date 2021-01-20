@@ -28,11 +28,11 @@
                     @if($prescription->status === "pending")                               
                     <tr>
                         <td>
-                            <a onClick="" href="#">
-                                <form id="" method="post" action="">
+                            <a onClick="$('#new_order_form').submit();" href="#">
+                                <form id="new_order_form" method="post" action="{{route('newOrderForm')}}">
                                     @csrf
                                     <i class="material-icons">done_outline</i>
-                                    <input type="hidden" value="" name="" id="">
+                                    <input type="hidden" value="{{$prescription->id}}" name="prescription_id" id="prescription_id">
                                 </form>
                             </a>
                         </td>

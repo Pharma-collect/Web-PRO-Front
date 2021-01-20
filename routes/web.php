@@ -70,6 +70,8 @@ Route::group(['middleware' => ['customAuth', 'tokenValidity']], function () {
     //Prescription -----------------------------------------------------
     Route::get('/admin/prescription', [\App\Http\Controllers\PrescriptionController::class, 'index']);
     Route::get('/admin/prescription/index', [\App\Http\Controllers\PrescriptionController::class, 'index']);
+
+
     //End Prescription -----------------------------------------------------
 
     //Logout -----------------------------------------------------
