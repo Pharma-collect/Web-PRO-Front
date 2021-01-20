@@ -9,10 +9,10 @@
         <p class="card-category"> Retrouvez l'ensemble de vos commandes à preparer.</p>
     </div>
     <div class="card-body">
-    <input type="text" id="search_input" class="form-control" onkeyup="searchFunction()" placeholder="Rechercher une commande...">
+    <input type="text" id="search_input" class="form-control" onkeyup="searchFunction('pending_orders_table')" placeholder="Rechercher une commande...">
     <br><br>
         <div class="table-responsive">
-            <table class="table" >
+            <table class="table sortable" >
                 <thead class=" text-primary">
                     <th>Id</th>
                     <th>Client</th>
@@ -113,10 +113,10 @@
         <p class="card-category"> Retrouvez l'ensemble de vos commandes pretes en attente d'un container.</p>
     </div>
     <div class="card-body">
-    <input type="text" id="search_input" class="form-control" onkeyup="searchFunction()" placeholder="Rechercher une commande...">
+    <input type="text" id="search_input" class="form-control" onkeyup="searchFunction('ready_orders_table)" placeholder="Rechercher une commande...">
     <br><br>
         <div class="table-responsive">
-            <table class="table" >
+            <table class="table sortable" >
                 <thead class=" text-primary">
                     <th>Id</th>
                     <th>Client</th>
@@ -217,10 +217,10 @@
         <p class="card-category"> Retrouvez l'ensemble de vos commandes placées dans vos containers.</p>
     </div>
     <div class="card-body">
-    <input type="text" id="search_input" class="form-control" onkeyup="searchFunction()" placeholder="Rechercher une commande...">
+    <input type="text" id="search_input" class="form-control" onkeyup="searchFunction('container_orders_table)" placeholder="Rechercher une commande...">
     <br><br>
         <div class="table-responsive">
-            <table class="table" >
+            <table class="table sortable">
                 <thead class=" text-primary">
                     <th>Id</th>
                     <th>Client</th>
@@ -321,10 +321,10 @@
         <p class="card-category"> Retrouvez l'historique de l'ensemble des commandes passées dasn votre etablissement.</p>
     </div>
     <div class="card-body">
-    <input type="text" id="search_input" class="form-control" onkeyup="searchFunction()" placeholder="Rechercher une commande...">
+    <input type="text" id="search_input" class="form-control" onkeyup="searchFunction('finish_orders_table')" placeholder="Rechercher une commande...">
     <br><br>
         <div class="table-responsive">
-            <table class="table" >
+            <table class="table sortable">
                 <thead class=" text-primary">
                     <th>Id</th>
                     <th>Client</th>
@@ -400,14 +400,17 @@
         </div>
     </div>
 </div>
+
+<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+
 <script>
-    function searchFunction() 
+    function searchFunction(id_elem) 
     {
         // Declare variables
         var input, filter, table, tr, td, i, txtValue;
         input = document.getElementById("search_input");
         filter = input.value.toUpperCase();
-        table = document.getElementById("pending_orders_table");
+        table = document.getElementById(id_elem);
         tr = table.getElementsByTagName("tr");
 
         // Loop through all table rows, and hide those who don't match the search query
