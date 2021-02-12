@@ -26,7 +26,7 @@ class OrderController extends Controller
     {    
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('POST',  env('HOST_URL').env('GET_ORDERS_BY_PHARMACY') , [
+        $response = $client->request('POST',  env('HOST_URL').config('ws.GET_ORDERS_BY_PHARMACY') , [
             'verify' => false,
             'headers' => [
                 'Host' => 'node',
@@ -50,7 +50,7 @@ class OrderController extends Controller
     {    
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('GET',  env('HOST_URL').env('GET_ALL_CLIENTS') , [
+        $response = $client->request('GET',  env('HOST_URL').config('ws.GET_ALL_CLIENTS') , [
             'verify' => false,
             'headers' => [
                 'Host' => 'node',
@@ -75,7 +75,7 @@ class OrderController extends Controller
     {    
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('POST',  env('HOST_URL').env('GET_ORDER_BY_ID') , [
+        $response = $client->request('POST',  env('HOST_URL').config('ws.GET_ORDER_BY_ID') , [
             'verify' => false,
             'headers' => [
                 'Host' => 'node',
@@ -99,7 +99,7 @@ class OrderController extends Controller
     {    
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('POST',  env('HOST_URL').env('GET_USER_PRO_BY_PHARMACY') , [
+        $response = $client->request('POST',  env('HOST_URL').config('ws.GET_USER_PRO_BY_PHARMACY') , [
             'verify' => false,
             'headers' => [
                 'Host' => 'node',
@@ -123,7 +123,7 @@ class OrderController extends Controller
     {    
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('POST',  env('HOST_URL').env('GET_CONTAINERS_BY_PHARMACY') , [
+        $response = $client->request('POST',  env('HOST_URL').config('ws.GET_CONTAINERS_BY_PHARMACY') , [
             'verify' => false,
             'headers' => [
                 'Host' => 'node',
@@ -147,7 +147,7 @@ class OrderController extends Controller
     {    
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('POST',  env('HOST_URL').env('GET_PRODUCTS_BY_PHARMACY') , [
+        $response = $client->request('POST',  env('HOST_URL').config('ws.GET_PRODUCTS_BY_PHARMACY') , [
             'verify' => false,
             'headers' => [
                 'Host' => 'node',
@@ -170,7 +170,7 @@ class OrderController extends Controller
     {    
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('POST',  env('HOST_URL').env('GET_PRESCRIPTION_BY_ID') , [
+        $response = $client->request('POST',  env('HOST_URL').config('ws.GET_PRESCRIPTION_BY_ID') , [
             'verify' => false,
             'headers' => [
                 'Host' => 'node',
@@ -193,7 +193,7 @@ class OrderController extends Controller
     {    
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('POST',  env('HOST_URL').env('UPDATE_PRESCRIPTION_BY_ID') , [
+        $response = $client->request('POST',  env('HOST_URL').config('ws.UPDATE_PRESCRIPTION_BY_ID') , [
             'verify' => false,
             'headers' => [
                 'Host' => 'node',
@@ -237,7 +237,7 @@ class OrderController extends Controller
         $container = $request->container;
         $detail = $request->details;
 
-        $response = $client->request('POST', env('HOST_URL').env('UPDATE_ORDER_BY_ID'), [
+        $response = $client->request('POST', env('HOST_URL').config('ws.UPDATE_ORDER_BY_ID'), [
             'verify' => false,
             'headers' => [
                 'Host' => 'node',
@@ -265,7 +265,7 @@ class OrderController extends Controller
     {    
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('POST', env('HOST_URL').env('DELETE_ORDER_BY_ID'), [
+        $response = $client->request('POST', env('HOST_URL').config('ws.DELETE_ORDER_BY_ID'), [
             'verify' => false,
             'headers' => [
                 'Host' => 'node',
@@ -336,7 +336,7 @@ class OrderController extends Controller
             array_push($tab_products, $array_tmp);
         }
 
-        $response = $client->request('POST', env('HOST_URL').env('ADD_ORDER'), [
+        $response = $client->request('POST', env('HOST_URL').config('ws.ADD_ORDER'), [
             'verify' => false,
             'headers' => [
                 'Host' => 'node',
@@ -359,7 +359,6 @@ class OrderController extends Controller
         $resultResponse = json_decode($response->getBody()->getContents());
 
         if($resultResponse->success){
-            //$this->updatePrescription($id_prescription, $id_preparator);
             return redirect('admin/order');
         } else {
             var_dump($resultResponse->error);

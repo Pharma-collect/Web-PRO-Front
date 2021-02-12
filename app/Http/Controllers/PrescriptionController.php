@@ -18,7 +18,7 @@ class PrescriptionController extends Controller
     {    
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('POST',  env('HOST_URL').env('GET_PRESCRIPTIONS_BY_PHARMACY') , [
+        $response = $client->request('POST',  env('HOST_URL').config('ws.GET_PRESCRIPTIONS_BY_PHARMACY') , [
             'verify' => false,
             'headers' => [
                 'Host' => 'node',
@@ -42,7 +42,7 @@ class PrescriptionController extends Controller
     {    
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('GET',  env('HOST_URL').env('GET_ALL_CLIENTS') , [
+        $response = $client->request('GET',  env('HOST_URL').config('ws.GET_ALL_CLIENTS') , [
             'verify' => false,
             'headers' => [
                 'Host' => 'node',
