@@ -9,3 +9,4 @@ chmod 777 bootstrap
 chmod 777 bootstrap/cache
 chmod 777 storage/framework/sessions
 chmod 777 storage/framework/views
+
