@@ -25,11 +25,11 @@
                 </thead>
                 <tbody id="prescriptions_table">
                     @foreach($prescriptions as $prescription)
-                    @if($prescription->status === "pending")                               
+                    @if(empty($prescription->id_preparator))                               
                     <tr>
                         <td>
-                            <a onClick="$('#new_order_form').submit();" href="#">
-                                <form id="new_order_form" method="post" action="{{route('newOrderForm')}}">
+                            <a onClick="$('#new_order_form_{{$prescription->id}}').submit();" href="#">
+                                <form id="new_order_form_{{$prescription->id}}" method="post" action="{{route('newOrderForm')}}">
                                     @csrf
                                     <i class="material-icons">done_outline</i>
                                     <input type="hidden" value="{{$prescription->id}}" name="prescription_id" id="prescription_id">
@@ -98,7 +98,7 @@
                 </thead>
                 <tbody id="old_prescriptions_table">
                     @foreach($prescriptions as $prescription)
-                    @if($prescription->status != "pending")                               
+                    @if(!empty($prescription->id_preparator))                              
                     <tr>
                         <td> {{$prescription->id}} </td>
                         <td> {{$prescription->status}} </td>

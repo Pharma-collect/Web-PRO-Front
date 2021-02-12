@@ -19,7 +19,7 @@ class ProductController extends Controller
     {    
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('POST',  env('HOST_URL').env('GET_PRODUCTS_BY_PHARMACY') , [
+        $response = $client->request('POST',  env('HOST_URL').config('ws.GET_PRODUCTS_BY_PHARMACY'), [
             'verify' => false,
             'headers' => [
                 'Host' => 'node',
@@ -43,7 +43,7 @@ class ProductController extends Controller
     {    
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('POST',  env('HOST_URL').env('GET_PRODUCT_BY_ID') , [
+        $response = $client->request('POST',  env('HOST_URL').config('ws.GET_PRODUCT_BY_ID'), [
             'verify' => false,
             'headers' => [
                 'Host' => 'node',
@@ -79,7 +79,7 @@ class ProductController extends Controller
         $description = $request->description;
         $image_url = $request->image_url;
 
-        $response = $client->request('POST', env('HOST_URL').env('UPDATE_PRODUCT_BY_ID'), [
+        $response = $client->request('POST', env('HOST_URL').config('ws.UPDATE_PRODUCT_BY_ID'), [
             'verify' => false,
             'headers' => [
                 'Host' => 'node',
@@ -121,7 +121,7 @@ class ProductController extends Controller
         $image_url = $request->image_url;
         $id_pharmacy = $pharmacy->id;
 
-        $response = $client->request('POST', env('HOST_URL').env('ADD_PRODUCT'), [
+        $response = $client->request('POST', env('HOST_URL').config('ws.ADD_PRODUCT'), [
             'verify' => false,
             'headers' => [
                 'Host' => 'node',
@@ -150,7 +150,7 @@ class ProductController extends Controller
     {    
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('POST', env('HOST_URL').env('DELETE_PRODUCT_BY_ID'), [
+        $response = $client->request('POST', env('HOST_URL').config('ws.DELETE_PRODUCT_BY_ID'), [
             'verify' => false,
             'headers' => [
                 'Host' => 'node',

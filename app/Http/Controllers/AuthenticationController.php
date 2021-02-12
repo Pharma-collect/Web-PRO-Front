@@ -14,7 +14,7 @@ class AuthenticationController extends Controller
 
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('POST', env('HOST_URL').env('LOGIN'), [
+        $response = $client->request('POST', env('HOST_URL').config('ws.LOGIN'), [
             'verify' => false,
             'headers' => [
                 'Host' => 'node',
