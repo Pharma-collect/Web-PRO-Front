@@ -9,6 +9,7 @@
         "GET_ORDERS_BY_PHARMACY" => '/order/getOrderByPharmacy',
         "GET_ORDER_BY_ID" => '/order/getOrderById',
         "UPDATE_ORDER_BY_ID" => '/order/updateOrder',
+        "GET_ORDER_DETAILS_BY_ORDER" => '/order_detail/getOrderDetailsByOrder',
         "GET_USER_PRO_BY_PHARMACY" => '/user_pro/getUserProByPharmacy',
         "GET_CONTAINERS_BY_PHARMACY" => '/container/getContainerByPharmacy',
         "GET_ALL_CLIENTS" => '/user_client/getAllUserClient',

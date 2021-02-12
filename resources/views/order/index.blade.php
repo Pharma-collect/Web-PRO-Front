@@ -14,6 +14,7 @@
         <div class="table-responsive">
             <table class="table sortable" >
                 <thead class=" text-primary">
+                    <th>Detail</th>
                     <th>Id</th>
                     <th>Client</th>
                     <th>Prix</th>
@@ -29,7 +30,17 @@
                     @foreach($orders as $order)
                         @if($order->status === "pending")
                         <tr>
-                            <td> {{$order->id}} </td>
+                            <td>
+                                <a onClick="$('#show_details_{{$order->id}}').submit();" href="#">
+                                    <form id="show_details_{{$order->id}}" method="post" action="{{route('showDetails')}}">
+                                        @csrf
+                                        <i class="material-icons">remove_red_eye</i>
+                                        <input type="hidden" value="{{$order->id}}" name="show_details_id" id="show_details_id">
+                                    </form></a>
+                            </td>
+                            <td> 
+                               {{$order->id}}
+                            </td>
                             @php
                                 $cli = "Pas de client assigné"
                             @endphp
@@ -404,6 +415,12 @@
 <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
 
 <script>
+
+    function pop_up_details(id){
+    window.open(url,'win2','status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=1076,height=768,directories=no,location=no') 
+    }
+
+
     function searchFunction(id_elem) 
     {
         // Declare variables
