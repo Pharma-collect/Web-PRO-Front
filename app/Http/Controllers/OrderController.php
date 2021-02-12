@@ -290,9 +290,12 @@ class OrderController extends Controller
         $pharmacy = unserialize(session('pharmacy'));
         $pharmacy_id = $pharmacy->id;
 
+        $presc = $this->getPrescriptionById($request->prescription_id);
+
         $data['products'] = $this->getProductsByPharmacy($pharmacy_id);
         $data['containers'] = $this->getContainersByPharmacy($pharmacy_id);
         $data['prescription'] = $request->prescription_id;
+        $data['image'] = $presc->image_url;
 
         return view('order/new_order_form', $data);
     }

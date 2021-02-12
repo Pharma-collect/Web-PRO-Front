@@ -14,6 +14,13 @@
                     <div class="card-body">
                         <form action="{{route('newOrder')}}" method="POST">
                         @csrf
+                        @if(!empty($image))
+                            <tr>
+                                <td> 
+                                    <img src={{$image}} style="width:100%; align:center;display: block; margin-left: auto;margin-right: auto;">
+                                </td>
+                            </tr>
+                        @endif
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -21,6 +28,7 @@
                                         <div class="table-responsive">
                                             <table class="table" >
                                                 <tbody id="products-table" style="display: block; border: 1px solid green; height: 150px; overflow-y: scroll">
+                            
                                                     @foreach($products as $product)
                                                     <tr>
                                                         <div>
