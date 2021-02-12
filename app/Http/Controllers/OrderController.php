@@ -143,6 +143,32 @@ class OrderController extends Controller
 
     }
 
+    public function getOrderDetailsByOrder($id_order)
+    {    
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('POST',  env('HOST_URL').config('ws.GET_ORDER_DETAILS_BY_ORDER') , [
+            'verify' => false,
+            'headers' => [
+                'Host' => 'node',
+            ],
+            'form_params' => [
+                'order_id' => $id_order,
+            ]
+        ]);
+
+        $resultResponse = json_decode($response->getBody()->getContents());
+
+        if($resultResponse->success){
+            return $resultResponse->result;
+        } else {
+            var_dump($resultResponse->error);
+        }
+
+    }
+
+
+
     public function getProductsByPharmacy($id_pharmacy)
     {    
         $client = new \GuzzleHttp\Client();
@@ -290,11 +316,24 @@ class OrderController extends Controller
         $pharmacy = unserialize(session('pharmacy'));
         $pharmacy_id = $pharmacy->id;
 
+        $presc = $this->getPrescriptionById($request->prescription_id);
+
         $data['products'] = $this->getProductsByPharmacy($pharmacy_id);
         $data['containers'] = $this->getContainersByPharmacy($pharmacy_id);
         $data['prescription'] = $request->prescription_id;
+        $data['image'] = $presc->image_url;
 
         return view('order/new_order_form', $data);
+    }
+
+    public function showDetails(Request $request)
+    {
+        $pharmacy = unserialize(session('pharmacy'));
+        $data['order'] = $this->getOrderById(request('show_details_id'));
+        $data['details'] = $this->getOrderDetailsByOrder(request('show_details_id'));
+        $data['products'] = $this->getProductsByPharmacy( $pharmacy->id);
+   
+        return view('order/show_details', $data);
     }
 
     public function newOrder(Request $request)
