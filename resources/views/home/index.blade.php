@@ -49,7 +49,7 @@
     </div>
     <br>
     <div class="card">
-      <div class="card-header card-header-primary" style="background: #8fc0a9 !important;">
+      <div class="card-header card-header-primary" style="background: #6b9080 !important;">
           <h3 class="card-title ">Prescriptions</h3>
       </div>
       <div class="card-body">
@@ -72,7 +72,7 @@
     </div>
     <br>
     <div class="card">
-      <div class="card-header card-header-primary" style="background: #6b9080 !important;">
+      <div class="card-header card-header-primary" style="background: #8fc0a9!important;">
           <h3 class="card-title ">Chiffre d'affaires</h3>
       </div>
       <div class="card-body">
