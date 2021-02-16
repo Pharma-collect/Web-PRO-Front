@@ -61,6 +61,31 @@ class HomeController extends Controller
 
     }
 
+    public function getProductsByPharmacy($pharmacy_id)
+    {    
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('POST',  env('HOST_URL').config('ws.GET_PRODUCTS_BY_PHARMACY') , [
+            'verify' => false,
+            'headers' => [
+                'Host' => 'node',
+            ],
+            'form_params' => [
+                'pharmacy_id' => $pharmacy_id,
+            ]
+        ]);
+
+        $resultResponse = json_decode($response->getBody()->getContents());
+
+        if($resultResponse->success){
+            return $resultResponse->result;
+        } else {
+            var_dump($resultResponse->error);
+        }
+
+    }
+
+
     public function getOrderDetailsByOrder($id_order)
     {    
         $client = new \GuzzleHttp\Client();
@@ -87,15 +112,26 @@ class HomeController extends Controller
 
     public function getCA($id_pharmacy){
         $orders = $this->getOrdersByPharmacy($id_pharmacy);
+        $products = $this->getProductsByPharmacy($id_pharmacy);
         $ca = array_fill(0, 3, 0);
         foreach($orders as $order){
             if($order->status === 'finish'){
                 $ca[0] += ($order->total_price);
-                if(empty($order->id_prescription)){
-                    $ca[1] += ($order->total_price);
-                }
-                else{
-                    $ca[2] += ($order->total_price);
+                $details = $this->getOrderDetailsByOrder($order->id);
+                foreach($details as $detail){
+                    foreach($products as $product)
+                    {
+                        if($product->id === $detail->id_product){
+                            if($product->prescription_only === 0)
+                            {
+                                $ca[1] += (($detail->quantity)*($product->price));
+                            }
+                            else
+                            {
+                                $ca[2] += (($detail->quantity)*($product->price));
+                            }                            
+                        }
+                    }
                 }
             }
         }
