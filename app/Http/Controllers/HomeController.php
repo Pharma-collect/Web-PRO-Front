@@ -113,6 +113,7 @@ class HomeController extends Controller
     public function getCA($id_pharmacy){
         $orders = $this->getOrdersByPharmacy($id_pharmacy);
         $products = $this->getProductsByPharmacy($id_pharmacy);
+        $test = 0;
         $ca = array_fill(0, 3, 0);
         foreach($orders as $order){
             if($order->status === 'finish'){
