@@ -6,32 +6,9 @@ class HomeController extends Controller
 {
     public function index(){
         $pharmacy = unserialize(session("pharmacy"));
-        $orders = $this->getOrdersByPharmacy($pharmacy->id);
-        $pending = 0;
-        $ready=0;
-        $container=0;
-        $finish=0;
-        foreach($orders as $order){
-            if($order->status === 'pending'){
-                $pending +=1;
-            }
-            elseif($order->status === 'ready')
-            {
-                $ready+=1;
-            }
-            elseif($order->status === 'container'){
-                $container+=1;
-            }
-            elseif($order->status === 'finish'){
-                $finish += 1;
-            }
-        }
-
-        $data['pharmacy_name'] = $pharmacy->name;
-        $data['pending'] = $pending;
-        $data['ready'] = $ready;
-        $data['container'] = $container;
-        $data['finish'] = $finish;
+        $data['order_status'] = $this->getOrderStatus($pharmacy->id);
+        $data['prescription_status'] = $this->getPrescriptionStatus($pharmacy->id);
+        $data['ca'] = $this->getCA($pharmacy->id);
 
         return view('home/index', $data);
     }
@@ -58,5 +35,104 @@ class HomeController extends Controller
             var_dump($resultResponse->error);
         }
 
+    }
+
+    public function getPrescriptionsByPharmacy($id_pharmacy)
+    {    
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('POST',  env('HOST_URL').config('ws.GET_PRESCRIPTIONS_BY_PHARMACY') , [
+            'verify' => false,
+            'headers' => [
+                'Host' => 'node',
+            ],
+            'form_params' => [
+                'pharmacy_id' => $id_pharmacy,
+            ]
+        ]);
+
+        $resultResponse = json_decode($response->getBody()->getContents());
+
+        if($resultResponse->success){
+            return $resultResponse->result;
+        } else {
+            var_dump($resultResponse->error);
+        }
+
+    }
+
+    public function getOrderDetailsByOrder($id_order)
+    {    
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('POST',  env('HOST_URL').config('ws.GET_ORDER_DETAILS_BY_ORDER') , [
+            'verify' => false,
+            'headers' => [
+                'Host' => 'node',
+            ],
+            'form_params' => [
+                'order_id' => $id_order,
+            ]
+        ]);
+
+        $resultResponse = json_decode($response->getBody()->getContents());
+
+        if($resultResponse->success){
+            return $resultResponse->result;
+        } else {
+            var_dump($resultResponse->error);
+        }
+
+    }
+
+    public function getCA($id_pharmacy){
+        $orders = $this->getOrdersByPharmacy($id_pharmacy);
+        $ca = array_fill(0, 3, 0);
+        foreach($orders as $order){
+            if($order->status === 'finish'){
+                $ca[0] += ($order->total_price);
+                if(empty($order->id_prescription)){
+                    $ca[1] += ($order->total_price);
+                }
+                else{
+                    $ca[2] += ($order->total_price);
+                }
+            }
+        }
+        return $ca;
+    }
+
+    public function getOrderStatus($id_pharmacy){
+        $orders = $this->getOrdersByPharmacy($id_pharmacy);
+        $order_status = array_fill(0, 4, 0);
+
+        foreach($orders as $order){
+            if($order->status === 'pending'){
+                $order_status[0]+=1;
+            }
+            elseif($order->status === 'ready')
+            {
+                $order_status[1]+=1;
+            }
+            elseif($order->status === 'container'){
+                $order_status[2]+=1;
+            }
+            elseif($order->status === 'finish'){
+                $order_status[3] += 1;
+            }
+        }
+        return $order_status;
+    }
+
+    public function getPrescriptionStatus($id_pharmacy){
+        $prescriptions = $this->getPrescriptionsByPharmacy($id_pharmacy);
+        $prescription_status = array_fill(0, 4, 0);
+
+        foreach($prescriptions as $presc){
+            if($presc->status === 'pending'){
+                $prescription_status[0]+=1;
+            }
+        }
+        return $prescription_status;
     }
 }

@@ -6,7 +6,7 @@
 <div class="card">
     <div class="card-header card-header-primary">
         <h3 class="card-title ">Prescriptions à prendre en charge</h3>
-        <p class="card-category"> Retrouvez l'ensemble des prescriptions addressées à votre pharmacie.</p>
+        <p class="card-category"> Retrouvez l'ensemble des prescriptions adressées à votre pharmacie.</p>
     </div>
     <div class="card-body">
     <input type="text" id="search_input" class="form-control" onkeyup="searchFunction()" placeholder="Rechercher une prescription...">
