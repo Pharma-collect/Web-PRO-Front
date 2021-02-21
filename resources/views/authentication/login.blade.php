@@ -43,6 +43,14 @@
         .text-info {
             color: #81aa66!important;
         }
+
+        .error-login {
+            color: red!important;
+        }
+
+        .error-login-container{
+            text-align: center;
+        }
     </style>
 
 
@@ -57,7 +65,13 @@
                 <div id="login-box" class="col-md-12">
                     <form id="login-form" class="form" action="{{ url('/admin/connexion') }}" method="POST">
                         @csrf
-                        <h3 class="text-center text-info">Login</h3>
+                        <h3 class="text-center text-info">Pharma-Collect</h3>
+
+                        @if(!$success_connect)
+                            <div class="error-login-container">
+                                <span class="error-login">* Identifiants incorrects</span>
+                            </div>
+                        @endif
 
                         <div class="form-group">
                             <label for="username" class="text-info">LOGIN</label><br>
@@ -78,7 +92,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                           <input type="submit" name="submit" class="btn btn-info btn-md" value="Connexion">
+                            <input type="submit" name="submit" class="btn btn-info btn-md" value="Connexion">
                         </div>
                     </form>
                 </div>
@@ -88,3 +102,4 @@
 </div>
 </body>
 </html>
+

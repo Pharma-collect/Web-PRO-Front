@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 class AuthenticationController extends Controller
 {
     public function index(){
-        return view('authentication/login');
+        $data['success_connect'] = true;
+
+        return view('authentication/login', $data);
     }
 
     public function login(){
@@ -19,6 +21,7 @@ class AuthenticationController extends Controller
             'headers' => [
                 'Host' => 'node',
             ],
+            'http_errors' => false,
             'form_params' => [
                 'username' => $username,
                 'password' => $password,
@@ -38,7 +41,9 @@ class AuthenticationController extends Controller
 
             return redirect('/admin');
         } else {
-            return redirect('/admin/connexion');
+            $data['success_connect'] = false;
+
+            return view('authentication/login', $data);
         }
     }
 }
