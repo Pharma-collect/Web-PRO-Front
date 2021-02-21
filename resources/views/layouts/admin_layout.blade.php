@@ -41,12 +41,12 @@
                         <p>Tableau de bord</p>
                     </a>
                 </li>
-                <li class="nav-item">
+               {{-- <li class="nav-item">
                     <a class="nav-link" href="{{url('/admin/user')}}">
                         <i class="material-icons">person</i>
                         <p>Mon compte</p>
                     </a>
-                </li>
+                </li>--}}
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('/admin/product')}}">
                         <i class="material-icons">shop</i>
@@ -62,7 +62,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('/admin/prescription')}}">
                         <i class="material-icons">receipt</i>
-                        <p>Prescriptions</p>
+                        <p>Ordonnances</p>
                     </a>
                 </li>
             </ul>
