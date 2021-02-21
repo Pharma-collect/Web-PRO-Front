@@ -40,7 +40,8 @@ class ProductController extends Controller
     }
 
     public function getProductById($id_product)
-    {    
+    {   
+
         $client = new \GuzzleHttp\Client();
 
         $response = $client->request('POST',  env('HOST_URL').config('ws.GET_PRODUCT_BY_ID'), [
@@ -63,7 +64,7 @@ class ProductController extends Controller
 
     }
 
-    public function updateForm()
+    public function updateFormProduct()
     { 
         $result = $this->getProductById(request('update_product_id'));
 
@@ -72,6 +73,7 @@ class ProductController extends Controller
 
     public function updateProduct(Request $request)
     {
+
         $client = new \GuzzleHttp\Client();
         $name = $request->name;
         $price = $request->price;

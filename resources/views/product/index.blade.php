@@ -35,7 +35,7 @@
                             <td> {{$product->price}} € </td>
                             <td>
                                 <a onClick="$('#update_form_{{$product->id}}').submit();" href="#">
-                                    <form id="update_form_{{$product->id}}" method="post" action="{{route('updateForm')}}">
+                                    <form id="update_form_{{$product->id}}" method="post" action="{{route('updateFormProduct')}}">
                                         @csrf
                                         <i class="material-icons">create</i>
                                         <input type="hidden" value="{{$product->id}}" name="update_product_id" id="update_product_id">
