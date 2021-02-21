@@ -38,6 +38,9 @@
                         </td>
                         <td> {{$prescription->id}} </td>
                         <td> A prendre en charge </td>
+                        @php
+                        $cli = 'Pas de client assigné'
+                        @endphp
                         @foreach($clients as $client)
                             @if($client->id === $prescription->id_client)
                                 @php
